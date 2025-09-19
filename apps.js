@@ -1,7 +1,11 @@
 const express = require('express');
+const expressLayouts = require('express-ejs-layout');
 const app = express();
 const port = 3000;
-
+//guna ejs
+app.set('view engine','ejs');
+app.use(expressLayouts);
+app.set('layout', 'layout/mainlayout');
 app.get('/', (req, res) =>{
     // res.send('Hello Wolrd')
     // res.json({
@@ -9,14 +13,30 @@ app.get('/', (req, res) =>{
     //     email : 'aa@gmail.com'
     //     noHp : '0812313'
     // });
-    res.sendFile('./index.html',{root: __dirname});
+    // res.sendFile('./index.html',{root: __dirname});
+const mahasiswa =[
+    {nama : 'ade',
+        email : 'ade@gmail',
+    },
+     {nama : 'asep',
+        email : 'asep@gmail',
+    },
+     {nama : 'agus',
+        email : 'agus@gmail',
+    },
+];
+res.render ('index',{
+    nama : 'ade',
+    title : 'Halaman Home',
+    mahasiswa : mahasiswa,
+});
 });
 app.get('/about', (req, res) => {
     res.sendFile('./about.html',{root: __dirname});
     //res.send('Halaman About!')
 });
 app.get('/contact', (req, res) => {
-    res.sendFile('./contac.html',{root: __dirname});
+    // res.sendFile('./contac.html',{root: __dirname});
     //res.send('Halaman Contact!')
 });
 app.get('/produck/:id', (req, res)=>{
